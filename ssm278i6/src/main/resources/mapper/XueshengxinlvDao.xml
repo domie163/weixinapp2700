@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.XueshengxinlvDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.entity.XueshengxinlvEntity" id="xueshengxinlvMap">
+        <result property="xuehao" column="xuehao"/>
+        <result property="xingbie" column="xingbie"/>
+        <result property="xingming" column="xingming"/>
+        <result property="zhaopian" column="zhaopian"/>
+        <result property="wodexinlv" column="wodexinlv"/>
+        <result property="beizhu" column="beizhu"/>
+        <result property="jiaoshixingming" column="jiaoshixingming"/>
+        <result property="dengjishijian" column="dengjishijian"/>
+        <result property="userid" column="userid"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.XueshengxinlvVO" >
+		SELECT * FROM xueshengxinlv  xueshengxinlv         
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.entity.vo.XueshengxinlvVO" >
+		SELECT  xueshengxinlv.* FROM xueshengxinlv  xueshengxinlv
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.XueshengxinlvView" >
+
+		SELECT  xueshengxinlv.* FROM xueshengxinlv  xueshengxinlv 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.entity.view.XueshengxinlvView" >
+		SELECT * FROM xueshengxinlv  xueshengxinlv <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+
+    <select id="selectValue" resultType="map" >
+        SELECT ${params.xColumn}, sum(${params.yColumn}) total FROM xueshengxinlv
+        <where> 1=1 ${ew.sqlSegment}</where>
+        group by ${params.xColumn}
+    </select>
+
+    <select id="selectTimeStatValue" resultType="map" >
+        <if test = 'params.timeStatType == "日"'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m-%d') ${params.xColumn}, sum(${params.yColumn}) total FROM xueshengxinlv
+                <where> 1=1 ${ew.sqlSegment}</where>
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m-%d')
+        </if>
+        <if test = 'params.timeStatType == "月"'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m') ${params.xColumn}, sum(${params.yColumn}) total FROM xueshengxinlv
+                <where> 1=1 ${ew.sqlSegment}</where>
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m')
+        </if>
+        <if test = 'params.timeStatType == "年"'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y') ${params.xColumn}, sum(${params.yColumn}) total FROM xueshengxinlv
+                <where> 1=1 ${ew.sqlSegment}</where>
+                group by DATE_FORMAT(${params.xColumn},'%Y')
+        </if>
+    </select>
+   
+    <select id="selectGroup" resultType="map" >
+        SELECT ${params.column} , count(1) total FROM xueshengxinlv  
+        <where> 1=1 ${ew.sqlSegment}</where>
+        group by ${params.column}
+    </select>
+	
+</mapper>

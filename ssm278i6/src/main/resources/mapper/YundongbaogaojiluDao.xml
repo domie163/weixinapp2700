@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.YundongbaogaojiluDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.entity.YundongbaogaojiluEntity" id="yundongbaogaojiluMap">
+        <result property="baogaomingcheng" column="baogaomingcheng"/>
+        <result property="yundongdidian" column="yundongdidian"/>
+        <result property="yundongshizhang" column="yundongshizhang"/>
+        <result property="yundongtupian" column="yundongtupian"/>
+        <result property="yundongneirong" column="yundongneirong"/>
+        <result property="baogaoneirong" column="baogaoneirong"/>
+        <result property="jiluriqi" column="jiluriqi"/>
+        <result property="beizhu" column="beizhu"/>
+        <result property="xuehao" column="xuehao"/>
+        <result property="xingming" column="xingming"/>
+        <result property="banji" column="banji"/>
+        <result property="jiaoshixingming" column="jiaoshixingming"/>
+        <result property="userid" column="userid"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.YundongbaogaojiluVO" >
+		SELECT * FROM yundongbaogaojilu  yundongbaogaojilu         
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.entity.vo.YundongbaogaojiluVO" >
+		SELECT  yundongbaogaojilu.* FROM yundongbaogaojilu  yundongbaogaojilu
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.YundongbaogaojiluView" >
+
+		SELECT  yundongbaogaojilu.* FROM yundongbaogaojilu  yundongbaogaojilu 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.entity.view.YundongbaogaojiluView" >
+		SELECT * FROM yundongbaogaojilu  yundongbaogaojilu <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+
+	
+</mapper>
